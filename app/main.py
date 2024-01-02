@@ -1,19 +1,21 @@
 from fastapi import Depends, FastAPI, HTTPException
-from passlib.context import CryptContext
-from sqlalchemy.orm import Session
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
-import secrets
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from sqlalchemy.orm import Session
+from database import SessionLocal, engine
+from typing import List
+import auth
 import crud
 import models
-import auth
 import schemas
-from database import SessionLocal, engine
 import os
 
 print("PRINT")
 if not os.path.exists('./sqlitedb'):
     os.makedirs('./sqlitedb')
+
+# Initialiseer database
+models.Base.metadata.create_all(bind=engine)
 
 # Initialiseer FastAPI
 app = FastAPI()
@@ -38,8 +40,7 @@ app.add_middleware(
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
-# Initialiseer database
-models.Base.metadata.create_all(bind=engine)
+
 
 # Maak database sessie
 def get_db():
