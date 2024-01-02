@@ -92,7 +92,7 @@ def create_event(event: schemas.EventCreate, db: Session = Depends(get_db), toke
 
 
 # Delete endpoints
-@app.delete("/events/{event_id}")
+@app.delete("/events/id/{event_id}")
 async def delete_existing_event(event_id: int, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
     return crud.delete_event(db, event_id)
 
