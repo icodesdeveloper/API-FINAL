@@ -1,11 +1,11 @@
 version: "3.9"
 services:
- apievents:
-  image: kunocls/api-final:latest
+ event-api-service:
+  image: kunocls/api-final
   ports:
     - "8000:8000"
   volumes:
-    - db_volume:/code/sqlitedb
+    - sqlite_volume:/code/sqlitedb
 
 volumes:
-  db_volume:
+  sqlite_volume:
