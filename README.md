@@ -16,7 +16,7 @@ De data van de verschillende evenementen die ik bijhoud zijn:
 - Einddatum
 - Betalend?
 
-##### Gemaakte deelopdrachten
+#### Gemaakte deelopdrachten
 
 - Algemene eisen (50%)
 - Aanvullende functies: 
@@ -25,11 +25,11 @@ De data van de verschillende evenementen die ik bijhoud zijn:
 
 De geschatte eindscore ligt rond de 60%. Het had me mooier geweest om een hoger resultaat neer te leggen. Helaas had ik de tijd lichtjes onderschat en was dit krap op mn planning.
 
-##### Hostomgeving
+#### Hostomgeving
 
 Mijn API wordt gehost op [OktetoCloud](https://event-api-service-icodesdeveloper.cloud.okteto.net)
 
-##### Werking van de API
+#### Werking van de API
 
 - GET, /events/: Laat alle evenementen zien   
     [![image.png](https://raw.githubusercontent.com/icodesdeveloper/API-FINAL/main/assets/images/apiw1.png)](https://raw.githubusercontent.com/icodesdeveloper/API-FINAL/main/assets/images/apiw1.png)
@@ -46,7 +46,7 @@ Mijn API wordt gehost op [OktetoCloud](https://event-api-service-icodesdeveloper
 - POST, /users/: Maak een nieuwe gebruiker aan  
     [![image.png](https://raw.githubusercontent.com/icodesdeveloper/API-FINAL/main/assets/images/apiw7.png)](https://raw.githubusercontent.com/icodesdeveloper/API-FINAL/main/assets/images/apiw7.png)
 
-##### OpenAPI Documentatie
+#### OpenAPI Documentatie
 
 [![image.png](https://raw.githubusercontent.com/icodesdeveloper/API-FINAL/main/assets/images/apid1.png)](https://raw.githubusercontent.com/icodesdeveloper/API-FINAL/main/assets/images/apid1.png)
 
@@ -63,3 +63,8 @@ Mijn API wordt gehost op [OktetoCloud](https://event-api-service-icodesdeveloper
 [![image.png](https://raw.githubusercontent.com/icodesdeveloper/API-FINAL/main/assets/images/apid7.png)](https://raw.githubusercontent.com/icodesdeveloper/API-FINAL/main/assets/images/apid7.png)
 
 [![image.png](https://raw.githubusercontent.com/icodesdeveloper/API-FINAL/main/assets/images/apid8.png)](https://raw.githubusercontent.com/icodesdeveloper/API-FINAL/main/assets/images/apid8.png)
+
+
+#### Github Actions PyTest:
+
+[![image.png](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/pyt1.png?raw=true)](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/pyt1.png?raw=true)
