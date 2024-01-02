@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event API Requests</title>
+</head>
+<body>
+
+    <h1>Event API Requests</h1>
+
+    <!-- Button 1: Get all events -->
+    <button onclick="getAllEvents()">Get All Events</button>
+
+    <!-- Button 2: Get event by ID -->
+    <label for="eventId">Event ID:</label>
+    <input type="text" id="eventId" placeholder="Enter Event ID">
+    <button onclick="getEventById()">Get Event by ID</button>
+
+    <!-- Button 3: Get event by City -->
+    <label for="eventCity">Event City:</label>
+    <input type="text" id="eventCity" placeholder="Enter Event City">
+    <button onclick="getEventByCity()">Get Event by City</button>
+
+    <!-- Button 4: Post new event -->
+    <label for="eventName">Event Name:</label>
+    <input type="text" id="eventName" placeholder="Enter Event Name">
+    <label for="eventCityPost">Event City:</label>
+    <input type="text" id="eventCityPost" placeholder="Enter Event City">
+    <label for="eventStartDate">Start Date:</label>
+    <input type="text" id="eventStartDate" placeholder="Enter Start Date">
+    <label for="eventEndDate">End Date:</label>
+    <input type="text" id="eventEndDate" placeholder="Enter End Date">
+    <label for="isPaid">Is Paid:</label>
+    <input type="checkbox" id="isPaid">
+    <button onclick="postNewEvent()">Post New Event</button>
+
+    <script>
+        const apiUrl = "https://event-api-service-icodesdeveloper.cloud.okteto.net/events/";
+        const bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrdW5vQGNsYWVzLm1lIiwiZXhwIjoxNzA0MjI0NzMxfQ.ja6J187nIN5RSC3mzVdijX9wDe33pBzfpJJjOcbkWH8";
+
+        function getAllEvents() {
+            fetch(apiUrl, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+
+        function getEventById() {
+            const eventId = document.getElementById('eventId').value;
+            fetch(`${apiUrl}/id/${eventId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${bearerToken}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+
+        function getEventByCity() {
+            const eventCity = document.getElementById('eventCity').value;
+            fetch(`${apiUrl}/city/${eventCity}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${bearerToken}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+
+        function postNewEvent() {
+            const eventName = document.getElementById('eventName').value;
+            const eventCityPost = document.getElementById('eventCityPost').value;
+            const eventStartDate = document.getElementById('eventStartDate').value;
+            const eventEndDate = document.getElementById('eventEndDate').value;
+            const isPaid = document.getElementById('isPaid').checked;
+
+            const eventData = {
+                "name": eventName,
+                "city": eventCityPost,
+                "startdate": eventStartDate,
+                "enddate": eventEndDate,
+                "isPaid": isPaid
+            };
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${bearerToken}`
+                },
+                body: JSON.stringify(eventData)
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
