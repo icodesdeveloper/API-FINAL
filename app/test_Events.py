@@ -17,7 +17,7 @@ def test_create_test_user():
     assert user["email"] == credentials["email"]
 
 
-#Get auth token
+#Get auth token 
 def get_auth_token(username: str, password: str):
     token_data = {
         "username": "example@contoso.com",
