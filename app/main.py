@@ -27,15 +27,22 @@ origins = [
     "http://localhost:8080",
     "https://localhost.tiangolo.com",
     "http://127.0.0.1:5500"
+    "*"
 ]
+
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=['*'],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
+
 )
+
+
+
 # Beveiliging: Authenticatie
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
