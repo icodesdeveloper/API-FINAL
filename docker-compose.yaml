@@ -5,7 +5,7 @@ services:
   ports:
     - "8000:8000"
   volumes:
-    - db_volume:/code/db
+    - db_volume:/code/sqlitedb
 
 volumes:
   db_volume:
