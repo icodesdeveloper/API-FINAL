@@ -1,106 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event API Requests</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Web API Kuno</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
 </head>
+
 <body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+        <div class="container"><a class="navbar-brand text-center logo" href="#">Evenementen API</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects-grid-cards.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hire-me.html">Hire me</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page lanidng-page">
+        <section class="portfolio-block block-intro">
+            <div class="row">
+                <div class="col"><button onclick="viewAllEvents()" class="btn btn-primary" type="button">Zie alle evenementen</button></div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                <hr>
+                            </th>
+                            <th colspan="2">
+                                <hr>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr></tr>
+                        <tr>
+                            <td class="text-end"><input type="text" name="eventId" placeholder="EvenementID"></td>
+                            <td><button onclick="viewEventById()" class="btn btn-primary d-md-flex align-items-md-start" type="button">Zie evenement</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <hr>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-end"><input type="text" placeholder="Evenement Locatie" name="EventLoc"></td>
+                            <td><button onclick="viewEventByLocation()" class="btn btn-primary d-md-flex align-items-md-start" type="button">Zie evenementen</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <hr>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5 class="text-end">Nieuw Evenement</h5>
+                                <div class="row">
+                                    <div class="col text-end" style="margin: 5px;"><input type="text" name="newNaam" placeholder="Naam"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-end" style="margin: 5px;"><input type="text" name="newStad" placeholder="Stad"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-end" style="margin: 5px;"><input type="date" name="newBegin"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-end" style="margin: 5px;"><input type="date" name="newEind"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-end">
+                                        <div class="form-check text-end d-md-flex justify-content-md-end" style="margin: 5px;"><input class="form-check-input" type="checkbox" id="formCheck-1" name="newBetalend"><label class="form-check-label" for="formCheck-1">Betalend?</label></div>
+                                    </div>
+                                </div>
+                                <header></header>
+                            </td>
+                            <td rowspan="5">
+                                <p></p><button onclick="postNewEvent()" class="btn btn-primary d-md-flex align-items-md-start" type="button">Maak nieuw evenement</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
 
-    <h1>Event API Requests</h1>
+<script>
+    let apiUrl = "https://event-api-service-icodesdeveloper.cloud.okteto.net";
 
-    <!-- Button 1: Get all events -->
-    <button onclick="getAllEvents()">Get All Events</button>
-
-    <!-- Button 2: Get event by ID -->
-    <label for="eventId">Event ID:</label>
-    <input type="text" id="eventId" placeholder="Enter Event ID">
-    <button onclick="getEventById()">Get Event by ID</button>
-
-    <!-- Button 3: Get event by City -->
-    <label for="eventCity">Event City:</label>
-    <input type="text" id="eventCity" placeholder="Enter Event City">
-    <button onclick="getEventByCity()">Get Event by City</button>
-
-    <!-- Button 4: Post new event -->
-    <label for="eventName">Event Name:</label>
-    <input type="text" id="eventName" placeholder="Enter Event Name">
-    <label for="eventCityPost">Event City:</label>
-    <input type="text" id="eventCityPost" placeholder="Enter Event City">
-    <label for="eventStartDate">Start Date:</label>
-    <input type="text" id="eventStartDate" placeholder="Enter Start Date">
-    <label for="eventEndDate">End Date:</label>
-    <input type="text" id="eventEndDate" placeholder="Enter End Date">
-    <label for="isPaid">Is Paid:</label>
-    <input type="checkbox" id="isPaid">
-    <button onclick="postNewEvent()">Post New Event</button>
-
-    <script>
-        const apiUrl = "https://event-api-service-icodesdeveloper.cloud.okteto.net/events/";
-        const bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrdW5vQGNsYWVzLm1lIiwiZXhwIjoxNzA0MjI0NzMxfQ.ja6J187nIN5RSC3mzVdijX9wDe33pBzfpJJjOcbkWH8";
-
-        function getAllEvents() {
-            fetch(apiUrl, {
+    // Function alert
+    function viewAllEvents() {
+        // Make sure no alert is shown
+        document.querySelectorAll('.alert').forEach(alert => alert.remove());
+        // GET all data from API /events/
+        fetch(`${apiUrl}/events/`, {
                 method: 'GET'
             })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-        }
-
-        function getEventById() {
-            const eventId = document.getElementById('eventId').value;
-            fetch(`${apiUrl}/id/${eventId}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${bearerToken}`
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
+                return response.json();
             })
-            .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                let alertData = ""
+                // Iterate over all events and add them to the alertData variable
+                data.forEach(event => {
+                    alertData += `Event ID: ${event.id}<br>Event Name: ${event.name}<br>Event City: ${event.city}<br>Event Start Date: ${event.startdate}<br>Event End Date: ${event.enddate}<br>Event Paid: ${event.isPaid}<br><br>`
+                });
+                // Show alert with all events
+                showAlert(alertData);
+            })
             .catch(error => console.error('Error:', error));
-        }
+    }
 
-        function getEventByCity() {
-            const eventCity = document.getElementById('eventCity').value;
-            fetch(`${apiUrl}/city/${eventCity}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${bearerToken}`
+    function viewEventById() {
+        document.querySelectorAll('.alert').forEach(alert => alert.remove());
+        const eventId = document.getElementsByName('eventId')[0].value;
+        fetch(`${apiUrl}/events/id/${eventId}`, {
+                method: 'GET'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
+                return response.json();
             })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-        }
-
-        function postNewEvent() {
-            const eventName = document.getElementById('eventName').value;
-            const eventCityPost = document.getElementById('eventCityPost').value;
-            const eventStartDate = document.getElementById('eventStartDate').value;
-            const eventEndDate = document.getElementById('eventEndDate').value;
-            const isPaid = document.getElementById('isPaid').checked;
-
-            const eventData = {
-                "name": eventName,
-                "city": eventCityPost,
-                "startdate": eventStartDate,
-                "enddate": eventEndDate,
-                "isPaid": isPaid
-            };
-
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${bearerToken}`
-                },
-                body: JSON.stringify(eventData)
+            .then(data => {
+                let alertData = ""
+                // It is one event so we can just add it to the alertData variable
+                alertData += `Event ID: ${data.id}<br>Event Name: ${data.name}<br>Event City: ${data.city}<br>Event Start Date: ${data.startdate}<br>Event End Date: ${data.enddate}<br>Event Paid: ${data.isPaid}<br><br>`
+                // Show alert with all events
+                showAlert(alertData);
             })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-        }
-    </script>
-</body>
+            .catch(error => {
+                // If we get a 404 error, show a different alert
+                if (error.message.includes("404")) {
+                    showAlert("Event not found");
+                } else {
+                    console.error('Error:', error)
+                }
+            });
+    }
+
+    function viewEventByLocation() {
+        document.querySelectorAll('.alert').forEach(alert => alert.remove());
+        const eventLoc = document.getElementsByName('EventLoc')[0].value;
+        fetch(`${apiUrl}/events/city/${eventLoc}`, {
+                method: 'GET'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                let alertData = ""
+                // Iterate over all events and add them to the alertData variable
+                data.forEach(event => {
+                    alertData += `Event ID: ${event.id}<br>Event Name: ${event.name}<br>Event City: ${event.city}<br>Event Start Date: ${event.startdate}<br>Event End Date: ${event.enddate}<br>Event Paid: ${event.isPaid}<br><br>`
+                });
+                // Show alert with all events
+                showAlert(alertData);
+            })
+            .catch(error => {
+                // If we get a 404 error, show a different alert
+                if (error.message.includes("404")) {
+                    showAlert("Event not found");
+                } else {
+                    console.error('Error:', error)
+                }
+            });
+    }
+
+// Now function to post new event with bearer token
+function postNewEvent() {
+    document.querySelectorAll('.alert').forEach(alert => alert.remove());
+    const eventName = document.getElementsByName('newNaam')[0].value;
+    const eventCity = document.getElementsByName('newStad')[0].value;
+    const eventStartDate = document.getElementsByName('newBegin')[0].value;
+    const eventEndDate = document.getElementsByName('newEind')[0].value;
+    const isPaid = document.getElementsByName('newBetalend')[0].checked;
+    const bearerToken = "hh";
+
+    const eventData = {
+        "name": eventName,
+        "city": eventCity,
+        "startdate": eventStartDate,
+        "enddate": eventEndDate,
+        "isPaid": isPaid
+    }
+
+
+    console.log(JSON.stringify(eventData));
+
+
+    fetch(`${apiUrl}/events/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${bearerToken}`
+            },
+            body: JSON.stringify(eventData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert(`Event ${data.name} created with ID ${data.id}`);
+        })
+        .catch(error => console.error('Error:', error));
+
+        // Clear all input fields
+        document.getElementsByName('newNaam')[0].value = "";
+        document.getElementsByName('newStad')[0].value = "";
+        document.getElementsByName('newBegin')[0].value = "";
+        document.getElementsByName('newEind')[0].value = "";
+        document.getElementsByName('newBetalend')[0].checked = false;
+
+}
+
+// Create a function that shows an alert as html on the page with a close button
+function showAlert(message) {
+
+    let alert = document.createElement("div");
+    alert.classList.add("alert", "alert-primary", "alert-dismissible", "fade", "show");
+    alert.setAttribute("role", "alert");
+    alert.innerHTML = message;
+    alert.innerHTML += `<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+    document.body.appendChild(alert);
+}
+
+
+</script>
+
+<style>
+    /* Make alert float on top of the page under the header */
+    .alert {
+        position: fixed;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+    }
+
+</style>
+
+
 </html>
