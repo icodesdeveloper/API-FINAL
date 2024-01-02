@@ -8,3 +8,4 @@ pymysql
 requests
 pytest
 asgiref
+jose
