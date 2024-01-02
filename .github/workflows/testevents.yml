@@ -1,4 +1,4 @@
-name: Deploy Locally and Test
+name: Test Custom Code
 
 on:
   workflow_run:
