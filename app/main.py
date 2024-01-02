@@ -11,6 +11,9 @@ import schemas
 from database import SessionLocal, engine
 import os
 
+if not os.path.exists('../sqlitedb'):
+    os.makedirs('../sqlitedb')
+
 # Initialiseer FastAPI
 app = FastAPI()
 
