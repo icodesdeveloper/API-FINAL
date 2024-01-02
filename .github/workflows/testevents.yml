@@ -19,6 +19,6 @@ jobs:
 
       - name: Run Tests Locally
         run: |
-          pip install -r requirements.txt
+          pip install pytest
           pytest app/test_Events.py
         continue-on-error: true
