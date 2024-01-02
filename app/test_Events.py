@@ -6,15 +6,15 @@ APP_URL = "http://127.0.0.1:8000"
 
 
 # Test gebruiker aanmaken
-# def test_create_test_user():
-#     credentials = {
-#         "email": "example@contoso.com",
-#         "password": "test"
-#     }
-#     response = requests.post(f"{APP_URL}/users/", json=credentials)
-#     assert response.status_code == 200
-#     user = response.json()
-#     assert user["email"] == credentials["email"]
+def test_create_test_user():
+    credentials = {
+        "email": "example@contoso.com",
+        "password": "test"
+    }
+    response = requests.post(f"{APP_URL}/users/", json=credentials)
+    assert response.status_code == 200
+    user = response.json()
+    assert user["email"] == credentials["email"]
 
 
 #Get auth token
