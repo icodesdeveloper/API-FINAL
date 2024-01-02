@@ -94,10 +94,10 @@ def test_update_event():
 
 # Test alle DELETE endpoints
 def test_delete_event():
-    response = requests.delete(f"{APP_URL}/events/1")
+    response = requests.delete(f"{APP_URL}/events/id/1")
     assert response.status_code == 401 # 401 = Unauthorized niet ingelogd
     login_token = get_auth_token("example@contoso.com", "test")
-    response = requests.delete(f"{APP_URL}/events/1", headers={"Authorization": f"Bearer {login_token}"})
+    response = requests.delete(f"{APP_URL}/events/id/1", headers={"Authorization": f"Bearer {login_token}"})
     assert response.status_code == 200 # 200 = OK
     assert response.json() == {"message": "Event deleted successfully"}
 
