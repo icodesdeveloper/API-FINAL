@@ -3,9 +3,11 @@ fastapi>=0.104.1
 pydantic>=2.4.2
 uvicorn>=0.15.0,<0.16.0
 python-jose[cryptography]
+python-multipart
 passlib
 bcrypt
 pymysql
 requests
 pytest
+argon2_cffi
 asgiref
