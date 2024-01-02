@@ -22,12 +22,15 @@ De data van de verschillende evenementen die ik bijhoud zijn:
 - Aanvullende functies: 
     - Test alle niet-GET eindpoints
     - Testfile wordt gerund door Github actions
+    - Een front-end die alle GET en POST endpoints bevat
+    - Front-end gehost op netlify
 
-De geschatte eindscore ligt rond de 60%. Het had me mooier geweest om een hoger resultaat neer te leggen. Helaas had ik de tijd lichtjes onderschat en was dit krap op mn planning.
+De geschatte eindscore ligt rond de 85%
 
 #### Hostomgeving
 
 Mijn API wordt gehost op [OktetoCloud](https://event-api-service-icodesdeveloper.cloud.okteto.net)
+Ook is er een front-end op [Netlify](https://6594876c4383a51b3b56deea--admirable-strudel-1e638c.netlify.app)
 
 #### Werking van de API
 
@@ -68,3 +71,12 @@ Mijn API wordt gehost op [OktetoCloud](https://event-api-service-icodesdeveloper
 #### Github Actions PyTest:
 
 [![image.png](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/pyt1.png?raw=true)](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/pyt1.png?raw=true)
+
+#### Werkende front-end op netlify
+[![image.png](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/apif1.png?raw=true)](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/apif1.png?raw=true)
+
+[![image.png](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/apif2.png?raw=true)](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/apif2.png?raw=true)
+
+[![image.png](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/apif3.png?raw=true)](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/apif3.png?raw=true)
+
+[![image.png](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/apif4.png?raw=true)](https://github.com/icodesdeveloper/API-FINAL/blob/main/assets/images/apif4.png?raw=true)
